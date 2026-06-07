@@ -26,7 +26,7 @@ t_node	*init_empty(void);
 t_node	*init_node(t_node *node, void *content, int idx);
 t_node	*init_new_list(void *content);
 t_node	*del_node(t_node *node, void (*rm_content)(void*));
-int	rm_node(t_node *node, void (*rm_content)(void*));
+int		rm_node(t_node *node, void (*rm_content)(void*));
 
 // --- func ---
 

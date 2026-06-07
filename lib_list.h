@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   element_lists.h                                    :+:      :+:    :+:   */
+/*   lib_lists.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lenivorb <lenivorb@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,12 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ELEMENT_LISTS_H
-# define ELEMENT_LISTS_H
-
-// --- include ---
-
-# include "none.h"
+#ifndef LIB_LISTS_H
+# define LIB_LISTS_H
 
 // --- DOC ---
 
@@ -25,9 +21,9 @@
 
 // --- Prototypes ---
 
-struct	s_node;
-struct	s_lib_element;
-struct	s_lib_elements;
+struct	s_library_content;
+struct	s_special_func;
+struct	s_libray_info;
 
 // --- Makros ---
 
@@ -35,40 +31,31 @@ struct	s_lib_elements;
 
 // --- struct ---
 
-// list nodes
-
-typedef struct s_node
-{
-	int			idx;
-	void		*content
-	t_node		*next;
-}				t_node;
-
 // list content
 
-typedef struct s_lib_element
+typedef struct s_library_content
 {
 	int		in_comment;
 	int		no_comment;
 	int		total;
 	char	*pattern;
-}			t_lib_element;
+}			t_libcontent;
+
+// special function
+
+typedef struct s_special_func
+{
+	void	(*increment_com)(t_lib_elements*, int);
+	void	(*increment_out)(t_lib_elements*, int);
+}			t_sfunc;
 
 // list skeleton
 
-typedef struct s_lib_elements
+typedef struct s_libray_info
 {
-	int				len;
-	char			*lib_name;
-	char			*incl_name;
-	t_node			*tail;
-	void			(*increment_com)(t_lib_elements*, int);
-	void			(*increment_out)(t_lib_elements*, int);
-	void			(*append)(t_lib_elements*, t_lib_element*);
-	t_lib_element	*(*by_index)(t_lib_elements*, int);
-	t_lib_element	*(*last)(t_lib_elements*, int);
-	t_node			*(*pop)(t_lib_elements*, (*f)(t_node*), int);
-}					t_lib_elements;
+	char	*lib_name;
+	char	*incl_name;
+}			t_libinfo;
 
 // --- end ---
 

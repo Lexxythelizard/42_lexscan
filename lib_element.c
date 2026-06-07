@@ -1,6 +1,6 @@
 // --- icludes ---
 
-#include "element_lists.h"
+#include "lib_lists.h"
 
 // --- DOC ---
 
@@ -12,9 +12,9 @@
 
 t_lib_element	*init_empty_content(void);
 t_lib_element	*init_content(char *pattern);
-t_lib_element	init_new_content(char *pattern);
-void			del_content(t_lib_element *content);
-void			rm_content(t_lib_element *content);
+t_lib_element	*init_new_content(char *pattern);
+t_lib_element	*del_content(t_lib_element *content);
+int				rm_content(t_lib_element *content);
 
 // --- define ---
 
@@ -29,13 +29,7 @@ t_lib_element	*init_empty_content(void)
 	t_lib_element	new;
 
 	new = malloc(32);
-	if (!(new))
-		return (NULL);
-	new -> in_comment = -1;
-	new -> no_comment = -1;
-	new -> total = -1;
-	new -> pattern = NULL;
-	return (new);
+	return (del_content(new));
 }
 
 /*
@@ -61,7 +55,7 @@ takes pointer to pattern
 returns a pointer to the new initialized content
 */
 
-t_lib_element	init_new_content(char *pattern)
+t_lib_element	*init_new_content(char *pattern)
 {
 	t_lib_element	new;
 
@@ -69,6 +63,7 @@ t_lib_element	init_new_content(char *pattern)
 		return (NULL);
 	new = init_empty_content();
 	new = init_content(new, pattern);
+	return (new);
 }
 
 /*
@@ -79,17 +74,17 @@ NOTE:
 	not meant to parsed to del_*() functions in node.c
 */
 
-void	del_content(t_lib_element *content)
+t_lib_element	*del_content(t_lib_element *content)
 {
 	if (!(content))
-		return ;
+		return (NULL);
 	new -> in_comment = -1;
 	new -> no_comment = -1;
 	new -> total = -1;
-	if (!(content -> pattern))
-		return ;
-	free(content -> pattern);
+	if (content -> pattern)
+		free(content -> pattern);
 	content -> pattern = NULL;
+	return (content);
 }
 
 /*
@@ -100,10 +95,11 @@ NOTE:
     can be parsed to del_*() functions in node.c
 */
 
-void	rm_content(t_lib_element *content)
+int	rm_content(t_lib_element *content)
 {
 	if (!(content))
-		return ;
+		return (-1);
 	del_content(content);
 	free(content);
+	return (0);
 }
