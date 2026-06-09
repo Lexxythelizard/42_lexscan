@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list.h                                             :+:      :+:    :+:   */
+/*   lists.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lenivorb <lenivorb@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 13:52:46 by lenivorb          #+#    #+#             */
-/*   Updated: 2026/06/05 15:00:08 by lenivorb         ###   ########.fr       */
+/*   Updated: 2026/06/08 15:55:37 by lenivorb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_basic_func
 	void	*(*append)(s_node**, void*);
 	void	*(*by_index)(s_node*, int);
 	void	*(*last)(s_node*);
-	void	*(*pop)(s_basic_func**);
+	void	*(*pop)(s_node**);
 }			t_basicfunc;
 
 typedef struct s_del_func

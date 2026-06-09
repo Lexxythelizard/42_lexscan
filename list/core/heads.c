@@ -53,7 +53,7 @@ t_head	*init_new_head(void *info, void *basicfunc)
 {
 	t_head	new;
 
-	if ((!(lib)) || (!(incl)))
+	if ((!(info)) || (!(basic_func)))
 		return (NULL);
 	new = init_empty_head();
 	return (init_head(new, info, basicfunc));
