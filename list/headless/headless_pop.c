@@ -6,7 +6,7 @@
 /*   By: lenivorb <lenivorb@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 10:59:41 by lenivorb          #+#    #+#             */
-/*   Updated: 2026/06/09 17:53:02 by lenivorb         ###   ########.fr       */
+/*   Updated: 2026/06/09 20:25:45 by lenivorb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 // --- prototype ---
 
 t_node	*headless_pop_node(t_node **node);
+void	*headless_pop(t_node **node);
 
 // --- define ---
 
@@ -48,4 +49,29 @@ t_node	*headless_pop_node(t_node **node)
 		sec_last = sec_last -> next;
 	sec_last -> next = NULL;
 	return (last);
+}
+
+void	*headless_pop(t_node **node)
+{
+	t_node	*last;
+	t_node	*sec_last;
+	void	*content;
+
+	if ((!node) || (!(*node)))
+		return (NULL);
+	if (!((*node)->next))
+	{
+		content = (*node)->content;
+		free(*node);
+		*node = NULL;
+		return (last);
+	}
+	last = headless_last_node(*node);
+	sec_last = *node;
+	while (sec_last -> next != last)
+		sec_last = sec_last -> next;
+	sec_last -> next = NULL;
+	content = last -> content;
+	free(last);
+	return (content);
 }

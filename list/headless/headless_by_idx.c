@@ -6,7 +6,7 @@
 /*   By: lenivorb <lenivorb@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 10:59:41 by lenivorb          #+#    #+#             */
-/*   Updated: 2026/06/09 17:57:33 by lenivorb         ###   ########.fr       */
+/*   Updated: 2026/06/09 18:40:44 by lenivorb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 // --- prototype ---
 
 t_node	*headless_by_idx_node(t_node *node, int idx);
+void	*headless_by_idx(t_node *node, int idx);
 
 // --- define ---
 
@@ -37,6 +38,19 @@ t_node	*headless_by_idx_node(t_node *node, int idx)
 	{
 		if (node -> idx == idx)
 			return (node);
+		node = node -> next;
+	}
+	return (NULL);
+}
+
+void	*headless_by_idx(t_node *node, int idx)
+{
+	if ((!node) || (idx < 0))
+		return (NULL);
+	while (node -> next)
+	{
+		if (node -> idx == idx)
+			return (node -> content);
 		node = node -> next;
 	}
 	return (NULL);

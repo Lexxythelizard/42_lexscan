@@ -6,7 +6,7 @@
 /*   By: lenivorb <lenivorb@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 10:59:41 by lenivorb          #+#    #+#             */
-/*   Updated: 2026/06/09 17:52:30 by lenivorb         ###   ########.fr       */
+/*   Updated: 2026/06/09 19:11:16 by lenivorb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 // --- prototype ---
 
 t_node	*headless_pop_by_index_node(t_node **node, int idx);
+void	*headless_pop_by_index(t_node **node, int idx);
 
 // --- define ---
 
@@ -31,6 +32,8 @@ t_node	*headless_pop_by_index_node(t_node **node, int idx);
 
 t_node	*headless_pop_by_index_node(t_node **node, int idx)
 {
+	t_node	*popped;
+
 	if ((!node) || (!(*node)) || (idx < 0))
 		return (NULL);
 	popped = headless_by_idx_node(*node, idx);
@@ -40,4 +43,21 @@ t_node	*headless_pop_by_index_node(t_node **node, int idx)
 		*node -> next = popped -> next;
 	popped -> next = NULL;
 	return (popped);
+}
+
+void	*headless_pop_by_index(t_node **node, int idx)
+{
+	t_node	*popped;
+	void	*content;
+
+	if ((!node) || (!(*node)) || (idx < 0))
+		return (NULL);
+	popped = headless_by_idx_node(*node, idx);
+	if (idx)
+		(headless_by_idx_node(*node, (idx - 1)))-> next = popped -> next;
+	else 
+		*node -> next = popped -> next;
+	content = popped -> content;
+	free(popped);
+	return (content);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core_utils.c                                       :+:      :+:    :+:   */
+/*   headless_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lenivorb <lenivorb@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 19:11:47 by lenivorb          #+#    #+#             */
-/*   Updated: 2026/06/09 17:20:35 by lenivorb         ###   ########.fr       */
+/*   Updated: 2026/06/09 20:19:01 by lenivorb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 // --- prototype ---
 
 int	headless_reindex(t_node *first);
+int headless_count(t_node *node);
 
 // --- define ---
 
@@ -46,4 +47,21 @@ int	headless_reindex(t_node *first)
 		ptr -> idx = i;
 	}
 	return (i);
+}
+
+int	headless_count(t_node *node)
+{
+	int		count;
+	t_node	*ptr;
+
+	count = 0;
+	ptr = node;
+	if (!ptr)
+		return (-1);
+	while (ptr)
+	{
+		count++;
+		ptr = ptr -> next;
+	}
+	return (count);
 }

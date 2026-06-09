@@ -6,7 +6,7 @@
 /*   By: lenivorb <lenivorb@student.42berlin.d      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 10:59:41 by lenivorb          #+#    #+#             */
-/*   Updated: 2026/06/09 17:55:49 by lenivorb         ###   ########.fr       */
+/*   Updated: 2026/06/09 18:38:07 by lenivorb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 // --- prototype ---
 
 void	headless_append_node(t_node **node, t_node *new);
+int		headless_append(t_node **node, void *content);
 
 // --- define ---
 
@@ -45,4 +46,26 @@ void	headless_append_node(t_node **node, t_node *new)
 		ptr = -> next;
 	ptr -> next = new;
 	headless_reindex(*node);
+}
+
+int	headless_append(t_node **node, void *content)
+{
+	t_node	*ptr;
+	t_node	*new;
+
+	if ((!node) || (!content))
+		return (-1);
+	new = init_new_node(content, 0);
+	if (!ptr)
+		return (-1);
+	ptr = *node;
+	if (!(*node))
+	{
+		*node = new;
+		return (1);
+	}
+	while (ptr -> next)
+		ptr = -> next;
+	ptr -> next = new;
+	return (headless_reindex(*node));
 }
